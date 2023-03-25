@@ -1,9 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using OnlineShop.API.Infrastructure;
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+
+builder.Services.AddSwaggerDoc();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -13,9 +16,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
+app.UseSwaggerDoc();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.Run();
